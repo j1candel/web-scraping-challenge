@@ -9,10 +9,12 @@ import pandas as pd
 
 # Setting up splinter
 def init_browser():
-    executable_path = {'executable_path': ChromeDriverManager().install()}
-    browser = Browser('chrome', **executable_path, headless = False)
+    executable_path = {'executable_path': "/usr/local/bin/chromedriver"}
+    return Browser('chrome', **executable_path, headless = False)
 
 def scrape_info():
+    browser = init_browser()
+
     # Setting url
     mars_url = 'https://mars.nasa.gov/news/'
 
@@ -123,4 +125,7 @@ def scrape_info():
                 'hemisphere_image_urls':hemisphere_image_urls,
                 'mars_facts':mars_html
                 }
+
+    browser.quit()
+    
     return(mars_dict)
