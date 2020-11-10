@@ -13,5 +13,14 @@ def index():
 
     return render_template('index.html', mars = mars_dict)
 
+@app.route('/scrape')
+def scrape():
+
+    mars_data = scrape_mars.scrape_info()
+
+    mongo.db.collection.update({}, mars_data, upsert=True)
+
+    return redirect('/')
+
 if __name__ == "__main__":
     app.run(debug=True)
