@@ -12,11 +12,16 @@
 <body>
     <div class='container-fluid'>
         <div class='jumbotron text-center'>
-            <h1>I Heard Mars is Very Nice This Time of Year!! Check it Out!!</h1>
+            <h1 class='font-weight-bold'>I Heard Mars is Very Nice This Time of Year!! Check it Out!!</h1>
             <p><a class='btn btn-primary btn-lg' href='/scrape' role='button'>Mars Facts</a></p>
         </div>
-        <h2 class='text-center'>Mars Facts</h2>
-        <h3>{{  mars.news_title  }}</h3>
+
+        <div class='row'>
+            <div>
+                <h2 class='text-center'>Mars Facts</h2>
+                <h3>{{mars.news_title}}</h3>
+            </div>
+        </div>
     </div>
 </body>
 </html>

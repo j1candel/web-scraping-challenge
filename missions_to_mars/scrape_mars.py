@@ -15,20 +15,15 @@ def init_browser():
 def scrape_info():
     browser = init_browser()
 
+    mars_dict = {}
+
     # Setting url
     mars_url = 'https://mars.nasa.gov/news/'
-
-    # Visit mars_url 
     browser.visit(mars_url)
-
-    # Scrape page into soup
     html = browser.html
     mars_soup = bs(html, 'html.parser')
 
-    # Getting the news title
     news_title = mars_soup.find_all('div', class_='content_title')[0].text
-
-    # Getting the description 
     news_p = mars_soup.find_all('div', class_='article_teaser_body')[0].text
 
     #Setting url
@@ -36,12 +31,10 @@ def scrape_info():
 
     #Visit jpg_url
     browser.visit(jpg_url)
-
-    #Scraping the description 
     html = browser.html
     jpg_soup = bs(html, 'html.parser')
 
-    #Finding the url string
+    #Finding the url string & Adding both urls together to get full url
     url_string = jpg_soup.find_all('img')[3]['src']
 
     #Adding both urls together to get full url
@@ -53,20 +46,9 @@ def scrape_info():
 
     #Bringing in the table
     tables = pd.read_html(table_url)
-
-    #Displaying the table 
-    tables
-
-    #Setting the table to type 2
     mars_facts = tables[2]
-
-    #Setting column names
     mars_facts.columns = ['Measurement','Value']
-
-    #Converting table to html
     mars_html = mars_facts.to_html()
-
-    #Replace \n with an empty string 
     mars_html = mars_html.replace('\n','')
 
     #Setting the urls
@@ -119,13 +101,12 @@ def scrape_info():
         hemisphere_image_urls.append(hem_images_dict)
 
     #Setting all entries into a dictionary 
-    mars_dict = {'news_title':news_title,
-                'news_p':news_p,
-                'featured_image_url':featured_image_url,
-                'hemisphere_image_urls':hemisphere_image_urls,
-                'mars_facts':mars_html
-                }
-
-    browser.quit()
+    mars_dict = {
+        'news_title':news_title,
+        'news_p':news_p,
+        'featured_image_url':featured_image_url,
+        'hemisphere_image_urls':hemisphere_image_urls,
+        'mars_facts':mars_html
+        }
     
-    return(mars_dict)
+    print(mars_dict)
