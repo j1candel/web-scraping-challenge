@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-compatible" content='ie=edge'>
     <title>Ma Ma Ma Mars Facts</title>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 </head>
 
 <body>
@@ -19,13 +21,45 @@
         <div class='row'>
             <div class= 'col-md-12'>
                 <h2 class='text-center'>Mars News</h2>
-                <h3>{{mars.news_title}}</h3>
-                <p>{{mars.news_p}}</p>
+                <h3>{{  mars.news_title  }}</h3>
+                <p>{{  mars.news_p  }}</p>
             </div>
         </div>
-        
-       
-
+    <hr>
+        <div class='row'> 
+            <div class='col-md-8'>
+                <h2>Featured Mars Image</h2>
+                </br>
+                <img src='{{mars.featured_image_url}}' alt='Mars Feature Picture'>
+            </div>
+            <div class= 'col-md-4'>
+                <div class='border'>
+                    <br>
+                    <h4>Mars Facts</h4>
+                    {{  mars.mars_facts | safe}}
+                </div>
+            </div>
+        </div>
+    <hr>
+        <div class='row'>
+            <h2 class='align-items-center'>Mar's Hemispheres</h6>
+        </div>
+        </br>
+        <div class='row'>
+            {% for hemisphere in mars.hemisphere_images %}
+            <div class = 'col-md-6'>
+            </br>
+                <div>
+                    <img width='512 px' height='512 px' src='{{hemisphere.img_url}}'>
+                </div>
+                
+                <div>
+                    <h4> {{hemisphere.title}}</h4>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    
     </div>
 </body>
 </html>

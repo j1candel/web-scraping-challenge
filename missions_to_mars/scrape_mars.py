@@ -1,15 +1,14 @@
 # Import Modules
 from bs4 import BeautifulSoup as bs
-import requests 
 import pymongo
 from splinter import Browser
 from flask import Flask, render_template, redirect
-from webdriver_manager.chrome import ChromeDriverManager
 import pandas as pd 
+
 
 # Setting up splinter
 def init_browser():
-    executable_path = {'executable_path': "/usr/local/bin/chromedriver"}
+    executable_path = {'executable_path': '/usr/local/bin/chromedriver'}
     return Browser('chrome', **executable_path, headless = False)
 
 def scrape_info():
@@ -39,7 +38,7 @@ def scrape_info():
 
     #Adding both urls together to get full url
     featured_image_url = jpg_url + url_string
-    featured_image_url
+
 
     #Findint the table url
     table_url = 'https://space-facts.com/mars/'
@@ -69,9 +68,7 @@ def scrape_info():
     #Setting hemisphere_image_urls to a list
     hemisphere_image_urls = []
 
-    #Setting hem_images_dict to a dictionary
-    hem_images_dict = {}
-
+    
     #Iterating through hemisphere_titles
     for n in hemisphere_titles:
         
@@ -92,7 +89,10 @@ def scrape_info():
         #Finding the url for large pics
         mars_pic_link = pic_soup.find('div', class_='downloads')
         image_url = mars_pic_link.find('li').a['href']
-        
+    
+        #Setting hem_images_dict to a dictionary
+        hem_images_dict = {}
+
         #Setting name of the dictionary keys 
         hem_images_dict['title']=title
         hem_images_dict['image_url']=image_url
@@ -102,11 +102,11 @@ def scrape_info():
 
     #Setting all entries into a dictionary 
     mars_dict = {
-        'news_title':news_title,
-        'news_p':news_p,
-        'featured_image_url':featured_image_url,
-        'hemisphere_image_urls':hemisphere_image_urls,
-        'mars_facts':mars_html
+            'news_title':news_title,
+            'news_p':news_p,
+            'featured_image_url':featured_image_url,
+            'hemisphere_image_urls':hemisphere_image_urls,
+            'mars_facts':mars_html
         }
     
     print(mars_dict)
