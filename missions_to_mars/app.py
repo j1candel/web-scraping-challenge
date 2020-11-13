@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect 
 from flask_pymongo import PyMongo
 import scrape_mars
+from bs4 import BeautifulSoup as bs
 
 app = Flask(__name__)
 
